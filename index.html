@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Internet</title>
+</head>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      main {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+      }
+      .title {
+        font-size: 30px;
+      }
+      ul {
+        position: relative;
+        left: 30px;
+      }
+      .reload {
+        border: none;
+        padding: 10px;
+        margin-top: 10px;
+        outline: none;
+        background: #666;
+        cursor: pointer;
+        color: #fff;
+        border-radius: 5px;
+      }
+    </style>
+<body>
+    <main id="main">
+        <h2 class="title">Off Now</h2>
+        <ul>
+            <li>Checking the connection</li>
+            <li>Checking the proxy and the firewall</li>
+            <li>Runing Windows Network Diagnostics</li>
+        </ul>
+        <button class="reload">Reload</button>
+    </main>
+    <script>
+        let title = document.querySelector('.title'),
+            ul = document.querySelector('ul'),
+            reload = document.querySelector('.reload');
+            navigator.onLine = online();
+        // We test if there is a connection or not and we display the result
+        navigator.onLine ? online() : offline();
+        // You check the connection in real time
+        window.addEventListener('online',()=> online());
+        window.addEventListener('offline',()=> offline());
+        // Button Reload The Page
+        reload.onclick = ()=>{
+            window.location.reload();
+        }
+        // Function For the Result Online 
+        function online (){
+            title.innerHTML = 'Online Now';
+            title.style.color = 'green';
+            ul.style.display = 'none';
+            reload.style.display = 'none';
+        }
+        // Function For the Result Offline 
+        function offline (){
+            title.innerHTML = 'Offline Now';
+            title.style.color = '#666';
+            ul.style.display = 'block';
+            reload.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
